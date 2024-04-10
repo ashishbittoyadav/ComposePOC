@@ -1,40 +1,19 @@
 package com.example.melz.network
 
-import kotlinx.serialization.Contextual
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+sealed interface ApiResponse<T> {
 
-@Serializable
-@SerialName("ApiResponse")
-sealed class ApiResponse<out T : Any> {
-    @Serializable
-    @SerialName("Success")
-    data class Success<out T : Any>(
-        val data: T?
-    ) : ApiResponse<T>()
+    data class Success<T>(val data: T) : ApiResponse<T>
+    data class Failure<T>(val exception: Exception) : ApiResponse<T>
 
-    @Serializable
-    @SerialName("Error")
-    data class Error(
-        @Contextual
-        val exception: Throwable? = null,
-        val responseCode: Int = -1
-    ) : ApiResponse<Nothing>()
+    fun onSuccess(block : (T) -> Unit):ApiResponse<T>{
+        if(this is Success)
+            block(data)
+        return this
+    }
 
-    fun handleResult(onSuccess: ((responseData: T?) -> Unit)?, onError: ((error: Error) -> Unit)?) {
-        when (this) {
-            is Success -> {
-                onSuccess?.invoke(this.data)
-            }
-            is Error -> {
-                onError?.invoke(this)
-            }
-        }
+    fun onFailure(block: (Exception) -> Unit):ApiResponse<T>{
+        if(this is Failure)
+            block(exception)
+        return this
     }
 }
-
-@Serializable
-data class ErrorResponse(
-    var errorCode: Int = 1,
-    val errorMessage: String = "Something went wrong"
-)

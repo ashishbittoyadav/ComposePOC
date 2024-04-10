@@ -95,4 +95,5 @@ dependencies {
     implementation(libs.media.kamel)
     implementation(libs.koin.compose)
     implementation(libs.ktor.server.status.pages)
+    implementation(libs.coil.compose)
 }
