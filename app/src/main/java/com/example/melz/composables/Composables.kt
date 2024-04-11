@@ -1,6 +1,5 @@
 package com.example.melz.composables
 
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -16,7 +15,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,64 +30,41 @@ import coil.compose.AsyncImage
 import com.example.melz.R
 import com.example.melz.model.Category
 import com.example.melz.model.MealCategory
-import com.example.melz.network.NetworkCallHelper
 import com.example.melz.ui.theme.MelzTheme
 import com.example.view_model.MealViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @Composable
-fun Greeting() {
+fun ListOfCategory() {
     val mealViewModel: MealViewModel = viewModel()
     val context = LocalContext.current
 
     mealViewModel.getCategory()
-//    LaunchedEffect(Unit) {
-//        CoroutineScope(Dispatchers.IO).launch {
-//            NetworkCallHelper.getCategoryResponse().onFailure {
-//                errorState.value = it.message!!
-//            }.onSuccess {
-//                categoryState.value = it
-//            }
-//
-////            NetworkCallHelper.getResponseWithParams().onSuccess {
-////                Log.d("Compose.TAG", "Greeting: $it")
-////            }.onFailure {
-////                Log.d("Compose.TAG", "Greeting: $it")
-////            }
-//        }
-//    }
-
-//    errorState.value.let {
-//        if (it.isNotEmpty())
-//            Text(text = it)
-//    }
-//    categoryState.value.categories.let {
     mealViewModel.responseState.collectAsState().value.let {
-//        if (!it.isNullOrEmpty()) {
         LazyColumn {
             if (!it.isLoading) {
                 if (it.error.isNotEmpty()) {
                     Toast.makeText(context, it.error, Toast.LENGTH_SHORT).show()
                 }else{
-                    it.mealCategory?.categories?.let {
-                        items(it) {
-                            Surface(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .wrapContentHeight()
-                                    .padding(4.dp)
-                                    .border(4.dp, Color.Gray, shape = RoundedCornerShape(15.dp))
-                            ) {
-                                MealCard(it)
+                    (it.mealCategory as MealCategory).categories.let { categoryItems ->
+                        if(categoryItems!=null){
+                            items(categoryItems) {
+                                Surface(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .wrapContentHeight()
+                                        .padding(4.dp)
+                                        .border(4.dp, Color.Gray, shape = RoundedCornerShape(15.dp))
+                                ) {
+                                    MealCard(it)
+                                }
                             }
+                        }else{
+                            Toast.makeText(context, "list is empty...", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
             }
         }
-//        }
     }
 }
 
@@ -103,7 +78,6 @@ private fun ShowPreview() {
 
 @Composable
 fun MealCard(category: Category) {
-    val context = LocalContext.current
     val expand = remember {
         mutableStateOf(false)
     }

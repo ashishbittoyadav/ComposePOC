@@ -10,8 +10,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.melz.composables.Greeting
-import com.example.melz.composables.MealCard
+import com.example.melz.composables.ListOfCategory
 import com.example.melz.ui.theme.MelzTheme
 import com.example.view_model.MealViewModel
 
@@ -28,7 +27,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                        Greeting()
+                        ListOfCategory()
                 }
             }
         }

@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 data class MealUiState(
-    val mealCategory: MealCategory?= null,
+    val mealCategory: Any?= null,
     val isLoading:Boolean=true,
     val error:String=""
 )
