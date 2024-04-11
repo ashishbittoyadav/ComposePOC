@@ -1,24 +1,22 @@
 package com.example.melz.repository
 
-import android.util.Log
+import com.example.melz.model.Meal
 import com.example.melz.model.MealCategory
-import com.example.melz.network.httpClientAndroid
-import io.ktor.client.call.body
-import io.ktor.client.request.get
+import com.example.melz.network.NetworkCallHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class MealRepository {
 
-    suspend fun getMealCategory() {
+    suspend fun getMealCategory(onSuccess : (data:MealCategory)->Unit,onFailure: (exception:Exception)->Unit) {
         CoroutineScope(IO).launch {
-            httpClientAndroid.get("https://www.themealdb.com/api/json/v1/1/categories.php")
-//            }).httpClientAndroid.get("https://www.themealdb.com/api/json/v1/1")
-                .call
-                .body<MealCategory>().let {
-                    Log.d("ComposeBody.TAG", "Greeting: $it")
-                }
+            NetworkCallHelper.getCategoryResponse().onFailure {
+                onFailure(it)
+            }.onSuccess {
+                onSuccess(it)
+            }
         }
     }
 

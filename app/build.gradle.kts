@@ -96,4 +96,5 @@ dependencies {
     implementation(libs.koin.compose)
     implementation(libs.ktor.server.status.pages)
     implementation(libs.coil.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
 }

@@ -1,19 +1,38 @@
 package com.example.view_model
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.melz.model.Meal
+import com.example.melz.model.MealCategory
+import com.example.melz.repository.MealRepository
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 
+data class MealUiState(
+    val mealCategory: MealCategory?= null,
+    val isLoading:Boolean=true,
+    val error:String=""
+)
 class MealViewModel : ViewModel() {
 
-    var isBottomSheetOpen = MutableStateFlow(false)
+    private val mealRepository = MealRepository()
 
-    fun toggleBottomSheet() {
-        isBottomSheetOpen.value = !isBottomSheetOpen.value
+    private val _responseState = MutableStateFlow(MealUiState())
+    val responseState : StateFlow<MealUiState> = _responseState.asStateFlow()
+
+    fun getCategory(){
+        viewModelScope.launch {
+            mealRepository.getMealCategory(
+                onFailure =  {
+                    _responseState.value = MealUiState(mealCategory = null,isLoading = false, error = it.message.toString())
+                },
+                onSuccess = {
+                    _responseState.value = MealUiState(mealCategory = it,isLoading = false)
+                }
+            )
+        }
     }
 
 }

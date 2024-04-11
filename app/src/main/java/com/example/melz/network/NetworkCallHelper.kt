@@ -4,11 +4,10 @@ import com.example.melz.model.MealCategory
 import com.example.melz.model.Meals
 import io.ktor.client.call.body
 import io.ktor.client.request.get
-import io.ktor.http.HeadersBuilder
 
 object NetworkCallHelper {
 
-    suspend fun getResponse(url:String="https://www.themealdb.com/api/json/v1/1/categories.php"):ApiResponse<MealCategory>{
+    suspend fun getCategoryResponse(url:String="https://www.themealdb.com/api/json/v1/1/categories.php"):ApiResponse<MealCategory>{
         return safeCallApi {
             httpClientAndroid.get(url).body<MealCategory>()
         }
