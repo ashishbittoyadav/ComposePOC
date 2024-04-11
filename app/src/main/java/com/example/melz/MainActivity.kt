@@ -16,8 +16,6 @@ import com.example.view_model.MealViewModel
 
 class MainActivity : ComponentActivity() {
 
-    private val mealViewModel = viewModels<MealViewModel>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
