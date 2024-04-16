@@ -39,3 +39,4 @@ jobs:
           attachments: |
             app-release.zip
           distribution: macos
+
