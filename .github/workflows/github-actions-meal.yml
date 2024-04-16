@@ -23,7 +23,7 @@ jobs:
         run: ./gradlew assembleRelease
 
       - name: Compress APK
-        run: zip -r app-release.zip app/build/outputs/apk/release/app-release.apk
+        run: zip -r app-debug.zip app/build/outputs/apk/debug/app-debug.apk
 
       - name: Send email
         uses: dawidd6/action-send-mail@v3
