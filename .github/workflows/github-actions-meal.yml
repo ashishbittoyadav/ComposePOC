@@ -34,6 +34,7 @@ jobs:
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: "APK Build - ${{ github.sha }}"
           body: "Please find attached the latest APK build."
+          from: ashishbitto07@gmail.com
           to: ashishbitto07@gmail.com
           attachments: |
             app-release.zip
