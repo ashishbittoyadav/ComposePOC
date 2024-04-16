@@ -11,6 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.melz.composables.ListOfCategory
+import com.example.melz.composables.MealDetailScreen
+import com.example.melz.model.Category
 import com.example.melz.ui.theme.MelzTheme
 import com.example.view_model.MealViewModel
 
@@ -26,15 +28,23 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                         ListOfCategory()
+//                    MealDetailScreen(
+//                        Category(
+//                            idCategory = "2",
+//                            strCategory = "Meal Category",
+//                            strCategoryDescription = "this is the description of the meal.",
+//                            strCategoryThumb = "https://www.themealdb.com/images/category/beef.png"
+//                        )
+//                    )
                 }
             }
         }
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MelzTheme {
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun GreetingPreview() {
+//    MelzTheme {
+//    }
+//}
