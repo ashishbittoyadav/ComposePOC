@@ -1,5 +1,6 @@
 package com.example.melz.composables
 
+import android.widget.ScrollView
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -15,8 +16,10 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.rounded.Close
@@ -47,6 +50,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import coil.compose.AsyncImage
+import com.example.melz.Constant
 import com.example.melz.R
 import com.example.melz.model.Category
 import com.example.melz.model.MealCategory
@@ -155,15 +159,28 @@ fun MealDetailScreen(categoryId: Int, navController: NavHostController) {
                                     .fillMaxWidth()
                                     .padding(horizontal = 20.dp)
                             ) {
-                                Text(
-                                    text = category.strCategory,
-                                    style = MaterialTheme.typography.displayLarge,
-                                    modifier = Modifier.align(Alignment.CenterHorizontally)
-                                )
+                                Surface(
+                                    modifier = Modifier
+                                        .align(Alignment.CenterHorizontally)
+                                        .border(
+                                            width = 1.dp,
+                                            color = if (category.strCategory == Constant.VEGETARIAN || category.strCategory == Constant.VEGAN) Color.Green else Color.Red,
+                                            shape = RoundedCornerShape(5.dp)
+                                        )
+                                ) {
+                                    Text(
+                                        text = category.strCategory,
+                                        style = MaterialTheme.typography.titleLarge,
+                                        modifier = Modifier
+                                            .padding(horizontal = 5.dp)
+                                    )
+                                }
                                 Text(
                                     text = category.strCategoryDescription,
                                     style = MaterialTheme.typography.titleMedium,
-                                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                                    modifier = Modifier
+                                        .align(Alignment.CenterHorizontally)
+                                        .verticalScroll(rememberScrollState())
                                 )
                             }
                         }
