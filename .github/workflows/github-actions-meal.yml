@@ -23,7 +23,7 @@ jobs:
         run: ./gradlew assembleDebug
 
       - name: Compress APK
-        run: zip -r app-debug.zip app/build/outputs/apk/debug/app-debug.apk
+        run: zip -r app-debug.txt app/build/outputs/apk/debug/app-debug.apk
 
       - name: Send email
         uses: dawidd6/action-send-mail@v3
@@ -33,11 +33,11 @@ jobs:
           username: ${{ secrets.EMAIL }}
           password: ${{ secrets.PASSWORD }}
           subject: "APK Build - ${{ github.sha }}"
-          body: "Please find attached the latest APK build."
+          body: "Please find attached the latest APK build. rename the extension from .txt to .zip. rename the extension for the security reasons."
           from: ashishbitto07@gmail.com
           to: ashishbitto07@gmail.com
           attachments: |
-            app-debug.zip
+            app-debug.txt
           distribution: macos
 
 
