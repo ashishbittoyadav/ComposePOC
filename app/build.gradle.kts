@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     kotlin("plugin.serialization") version "1.9.20"
+    alias(libs.plugins.org.jetbrains.kotlin.kapt)
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -97,4 +99,15 @@ dependencies {
     implementation(libs.ktor.server.status.pages)
     implementation(libs.coil.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+    implementation(libs.androidx.navigation.compose)
+
+    implementation(libs.room.ktx)
+    implementation(libs.room.runtime)
+    annotationProcessor(libs.room.compiler)
+    annotationProcessor(libs.compiler)
+//    kapt(libs.androidx.room.compiler)
+    ksp(libs.androidx.room.compiler)
+
+
 }

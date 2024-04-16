@@ -18,6 +18,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven("https://jitpack.io")
         maven { url = URI("https://kotlin.bintray.com/kotlinx")  }
     }
 }
