@@ -37,7 +37,7 @@ jobs:
           from: ashishbitto07@gmail.com
           to: ashishbitto07@gmail.com
           attachments: |
-            app-release.zip
+            app-debug.zip
           distribution: macos
 
 
