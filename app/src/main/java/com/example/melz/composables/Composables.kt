@@ -42,6 +42,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -57,13 +58,15 @@ import com.example.melz.model.MealCategory
 import com.example.melz.ui.theme.MelzTheme
 import com.example.view_model.MealUiState
 import com.example.view_model.MealViewModel
+import javax.inject.Inject
 
 @Composable
 fun ListOfCategory() {
-    val mealViewModel: MealViewModel = viewModel()
-    val context = LocalContext.current
+//    val mealViewModel: MealViewModel = viewModel()
 
-    mealViewModel.getCategory(context)
+    val mealViewModel = hiltViewModel<MealViewModel>()
+
+    mealViewModel.getCategory()
 
 
     val navController = rememberNavController()
@@ -119,8 +122,10 @@ private fun ShowPreview() {
 
 @Composable
 fun MealDetailScreen(categoryId: Int, navController: NavHostController) {
-    val mealViewModel: MealViewModel = viewModel()
-    mealViewModel.getCategoryById(context = LocalContext.current, categoryId.toString())
+//    val mealViewModel: MealViewModel = viewModel()
+    val mealViewModel = hiltViewModel<MealViewModel>()
+
+    mealViewModel.getCategoryById(categoryId.toString())
 
     mealViewModel.responseState.collectAsState().value.let {
         if (it.mealCategory != null) {

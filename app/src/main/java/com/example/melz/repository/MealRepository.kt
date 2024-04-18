@@ -1,21 +1,18 @@
 package com.example.melz.repository
 
-import android.content.Context
-import android.util.Log
-import com.example.melz.model.Meal
 import com.example.melz.model.MealCategory
 import com.example.melz.network.NetworkCallHelper
-import com.example.melz.roomdb.MealDatabase
+import com.example.melz.roomdb.MealDao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MealRepository(context: Context) {
+class MealRepository @Inject constructor() {
 
     private val TAG = "MealRepository.TAG"
 
-    private val mealDao = MealDatabase.getInstance(context).mealDao
+    @Inject lateinit var mealDao : MealDao
 
     suspend fun getMealCategory(onSuccess : (data:MealCategory)->Unit,onFailure: (exception:Exception)->Unit) {
         CoroutineScope(IO).launch {

@@ -1,6 +1,7 @@
 package com.example.melz
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -15,9 +16,14 @@ import com.example.melz.composables.MealDetailScreen
 import com.example.melz.model.Category
 import com.example.melz.ui.theme.MelzTheme
 import com.example.view_model.MealViewModel
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -28,23 +34,8 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                         ListOfCategory()
-//                    MealDetailScreen(
-//                        Category(
-//                            idCategory = "2",
-//                            strCategory = "Meal Category",
-//                            strCategoryDescription = "this is the description of the meal.",
-//                            strCategoryThumb = "https://www.themealdb.com/images/category/beef.png"
-//                        )
-//                    )
                 }
             }
         }
     }
 }
-
-//@Preview(showBackground = true)
-//@Composable
-//fun GreetingPreview() {
-//    MelzTheme {
-//    }
-//}
