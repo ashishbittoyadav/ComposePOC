@@ -1,36 +1,23 @@
-package com.example.melz.network
+package com.ashish.network
 
 import android.util.Log
-import com.example.melz.model.Category
-import com.example.melz.model.MealCategory
 import io.ktor.client.HttpClient
-import io.ktor.client.call.HttpClientCall
-import io.ktor.client.call.body
-import io.ktor.client.call.receive
 import io.ktor.client.engine.android.Android
-import io.ktor.client.engine.cio.CIO
-import io.ktor.client.features.json.JsonSerializer
 import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.HttpResponseValidator
 import io.ktor.client.plugins.HttpTimeout
-import io.ktor.client.plugins.ResponseException
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
-import io.ktor.client.plugins.observer.ResponseObserver
 import io.ktor.client.request.accept
 import io.ktor.client.request.header
-import io.ktor.client.statement.HttpResponse
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
-import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
-import io.ktor.server.plugins.statuspages.*
 import kotlinx.serialization.json.Json
-import kotlin.Exception
 
 private const val NETWORK_TIME_OUT = 6_000L
 val httpClientAndroid = HttpClient(Android) {

@@ -1,5 +1,8 @@
 import java.net.URI
 
+include(":networking")
+
+
 pluginManagement {
     repositories {
         google {
