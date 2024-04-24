@@ -13,12 +13,22 @@ object NetworkCallHelper {
         }
     }
 
-    suspend fun getResponseWithParams(url: String="https://www.themealdb.com/api/json/v1/1/search.php?s=Rice",mealName:String="Rice"):ApiResponse<Meals>{
+    suspend fun getResponseWithParams(mealName:String="Rice"):ApiResponse<Meals>{
         return safeCallApi {
-            httpClientAndroid.get(url){
+            httpClientAndroid.get("https://www.themealdb.com/api/json/v1/1/search.php?s=$mealName"){
                 url{
                     parameters.append("s",mealName)
                 }
+            }.body<Meals>()
+        }
+    }
+
+    suspend fun getResponseWithInitial(mealInitial:String="a"):ApiResponse<Meals>{
+        return safeCallApi {
+            httpClientAndroid.get("https://www.themealdb.com/api/json/v1/1/search.php?a=$mealInitial"){
+//                url{
+//                    parameters.append("s",mealInitial)
+//                }
             }.body<Meals>()
         }
     }

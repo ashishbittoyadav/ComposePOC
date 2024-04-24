@@ -4,6 +4,9 @@ plugins {
     kotlin("plugin.serialization") version "1.9.23"
     alias(libs.plugins.org.jetbrains.kotlin.kapt)
     id("com.google.devtools.ksp")
+
+    //hilt
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -105,10 +108,17 @@ dependencies {
 
     implementation(libs.room.ktx)
     implementation(libs.room.runtime)
-    annotationProcessor(libs.room.compiler)
-    annotationProcessor(libs.compiler)
-//    kapt(libs.androidx.room.compiler)
+    ksp(libs.room.compiler)
+    ksp(libs.compiler)
     ksp(libs.androidx.room.compiler)
 
 
+    //Hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
+}
+
+kapt {
+    correctErrorTypes = true
 }

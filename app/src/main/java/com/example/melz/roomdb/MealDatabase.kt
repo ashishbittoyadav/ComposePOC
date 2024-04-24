@@ -10,24 +10,23 @@ import io.ktor.util.reflect.instanceOf
 @Database(entities = [Category::class], version = 1, exportSchema = false)
 abstract class MealDatabase : RoomDatabase(){
     abstract val mealDao : MealDao
-
-    companion object{
-        @Volatile
-        private var INSTANCE : MealDatabase?=null
-
-        fun getInstance(context: Context):MealDatabase{
-            synchronized(this){
-                var instance = INSTANCE
-                if (instance==null){
-                    instance = Room.databaseBuilder(context.applicationContext,
-                        MealDatabase::class.java,
-                        "meal_data_base")
-                        .build()
-                    INSTANCE = instance
-                }
-                return INSTANCE!!
-            }
-        }
-    }
+//    companion object{
+//        @Volatile
+//        private var INSTANCE : MealDatabase?=null
+//
+//        fun getInstance(context: Context):MealDatabase{
+//            synchronized(this){
+//                var instance = INSTANCE
+//                if (instance==null){
+//                    instance = Room.databaseBuilder(context.applicationContext,
+//                        MealDatabase::class.java,
+//                        "meal_data_base")
+//                        .build()
+//                    INSTANCE = instance
+//                }
+//                return INSTANCE!!
+//            }
+//        }
+//    }
 
 }

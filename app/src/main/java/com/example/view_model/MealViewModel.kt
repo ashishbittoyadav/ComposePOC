@@ -12,44 +12,29 @@ import androidx.lifecycle.viewmodel.CreationExtras
 import com.example.melz.model.Meal
 import com.example.melz.model.MealCategory
 import com.example.melz.repository.MealRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 data class MealUiState(
     val mealCategory: Any?= null,
     val isLoading:Boolean=true,
     val error:String=""
 )
-class MealViewModel : ViewModel() {
+@HiltViewModel
+class MealViewModel @Inject constructor(): ViewModel() {
 
     private val _responseState = MutableStateFlow(MealUiState())
     val responseState : StateFlow<MealUiState> = _responseState.asStateFlow()
 
-//    companion object {
-//
-//        val Factory: ViewModelProvider.Factory = object : ViewModelProvider.Factory {
-//            @Suppress("UNCHECKED_CAST")
-//            override fun <T : ViewModel> create(
-//                modelClass: Class<T>,
-//                extras: CreationExtras
-//            ): T {
-//                // Get the Application object from extras
-//                val application = checkNotNull(extras[APPLICATION_KEY])
-//                // Create a SavedStateHandle for this ViewModel from extras
-//                val savedStateHandle = extras.createSavedStateHandle()
-//
-//                return MealViewModel(
-//                    application = application
-//                ) as T
-//            }
-//        }
-//    }
+    @Inject lateinit var mealRepository: MealRepository
 
-    fun getCategory(context: Context){
+    fun getCategory(){
         viewModelScope.launch {
-            val mealRepository = MealRepository(context = context)
+//            val mealRepository = MealRepository(context = context)
             mealRepository.getMealCategory(
                 onFailure =  {
                     _responseState.value = MealUiState(mealCategory = null,isLoading = false, error = it.message.toString())
@@ -61,9 +46,9 @@ class MealViewModel : ViewModel() {
         }
     }
 
-    fun getCategoryById(context: Context,categoryId:String){
+    fun getCategoryById(categoryId:String){
         viewModelScope.launch {
-            val mealRepository = MealRepository(context = context)
+//            val mealRepository = MealRepository(context = context)
             mealRepository.getCategoryById(categoryId).let {
                 _responseState.value = MealUiState(it,false,"")
             }
