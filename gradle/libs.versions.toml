@@ -23,7 +23,7 @@ ktor = "2.3.9"
 koin="1.1.0"
 kamel = "0.9.4"
 navigationCompose = "2.7.7"
-networking = "1.0.0-beta03"
+networking = "1.0.1"
 org-jetbrains-kotlin-android = "1.9.23"
 room = "2.6.1"
 appcompat = "1.6.1"
@@ -60,7 +60,7 @@ ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "kto
 ktor-client-cio= {module ="io.ktor:ktor-client-cio", version.ref = "ktor"}
 ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
 kotlin-serialization = {module = "io.ktor:ktor-serialization-kotlinx-json", version.ref="ktor"}
-ktor-server-status-pages = { module = "io.ktor:ktor-server-status-pages", version.ref = "ktorServerStatusPages" }
+#ktor-server-status-pages = { module = "io.ktor:ktor-server-status-pages", version.ref = "ktorServerStatusPages" }
 media-kamel = {module="media.kamel:kamel-image", version.ref="kamel"}
 koin-compose = {module="io.insert-koin:koin-compose", version.ref = "koin"}
 ktor-client-content-negotiation = {module = "io.ktor:ktor-client-content-negotiation", version.ref= "ktor"}
@@ -72,7 +72,7 @@ hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", ve
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 
 #Database
-#networking = { module = "network:networking", version.ref = "networking" }
+networking = { module = "network:networking", version.ref = "networking" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
