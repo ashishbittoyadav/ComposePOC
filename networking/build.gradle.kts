@@ -36,26 +36,27 @@ android {
     }
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            groupId = "network"
-            artifactId = "networking"
-            version = "1.0.0-beta01"
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("maven") {
+                groupId = "network"
+                artifactId = "networking"
+                version = "1.0.0-beta01"
 
-            afterEvaluate {
+//            afterEvaluate {
 //                artifact("${layout.buildDirectory.get()}/outputs/aar/networking-release.aar")
-                artifact("build/libs/${archivesName}-release.jar")
+//            }
             }
         }
-    }
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/${System.getenv("OWNER")}/ComposePOC")
-            credentials {
-                username = System.getenv("OWNER")
-                password = System.getenv("TOKEN")
+        repositories {
+            maven {
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/${System.getenv("OWNER")}/ComposePOC")
+                credentials {
+                    username = System.getenv("OWNER")
+                    password = System.getenv("TOKEN")
+                }
             }
         }
     }
