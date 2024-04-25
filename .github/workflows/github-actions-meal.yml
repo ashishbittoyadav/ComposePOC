@@ -27,6 +27,9 @@ jobs:
 
       - name: publish
         run: ./gradlew publish
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
+          OWNER: ${{ secrets.OWNER }}
 
 #      - name: Rename APK
 #        run: mv app-debug.zip app-debug.txt
