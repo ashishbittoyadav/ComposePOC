@@ -42,7 +42,7 @@ afterEvaluate {
             create<MavenPublication>("maven") {
                 groupId = "network"
                 artifactId = "networking"
-                version = "1.0.0-beta03"
+                version = "1.0.1"
                 artifact("${buildDir}/outputs/aar/networking-release.aar")
 
 //            afterEvaluate {

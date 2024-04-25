@@ -1,5 +1,6 @@
 package com.example.melz.network
 
+import com.ashish.network.httpClientAndroid
 import com.example.melz.model.MealCategory
 import com.example.melz.model.Meals
 import io.ktor.client.call.body
