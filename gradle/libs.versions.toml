@@ -23,6 +23,7 @@ ktor = "2.3.9"
 koin="1.1.0"
 kamel = "0.9.4"
 navigationCompose = "2.7.7"
+networking = "1.0.0-beta02"
 org-jetbrains-kotlin-android = "1.9.23"
 room = "2.6.1"
 appcompat = "1.6.1"
@@ -71,6 +72,7 @@ hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", ve
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 
 #Database
+networking = { module = "network:networking", version.ref = "networking" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
