@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.archivesName
 import java.net.URI
 
 plugins {
@@ -43,7 +44,8 @@ publishing {
             version = "1.0.0-beta01"
 
             afterEvaluate {
-                artifact("${layout.buildDirectory.get()}/outputs/aar/networking-release.aar")
+//                artifact("${layout.buildDirectory.get()}/outputs/aar/networking-release.aar")
+                artifact("build/libs/${archivesName}-release.jar")
             }
         }
     }
