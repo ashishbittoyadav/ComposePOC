@@ -35,42 +35,26 @@ android {
     }
 }
 
-//afterEvaluate {
-//    publishing {
-//        publications {
-//            create<MavenPublication>("maven") {
-//                groupId = "com.ashish.network"
-//                artifactId = "networking"
-//                version = "1.0.0"
-//
-//                from(components["java"])
-//            }
-//        }
-//
-//        repositories {
-//            maven {
-//                name = "GitHubPackages"
-//                url = URI("https://maven.pkg.github.com/ashish/network")
-//            }
-//        }
-//    }
-//}
-
 publishing {
     publications {
-        create<MavenPublication>("ReleaseAar") {
-            groupId = "com.ashish.network"
+        create<MavenPublication>("maven") {
+            groupId = "network"
             artifactId = "networking"
-            version = "1.0.0"
+            version = "1.0.0-beta01"
+
             afterEvaluate {
-                artifact(tasks.getByName("bundleReleaseAar"))
+                artifact("${layout.buildDirectory.get()}/outputs/aar/networking-release.aar")
             }
         }
     }
-    repositories{
-        maven{
-            name = "GithubPackages"
-            url = URI("https://maven.pkg.github.com/ashish/network")
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/${System.getenv("OWNER")}/ComposePOC")
+            credentials {
+                username = System.getenv("OWNER")
+                password = System.getenv("TOKEN")
+            }
         }
     }
 }
